@@ -1,0 +1,1 @@
+PGPASSWORD=fishfarm psql -h localhost -U fishfarm -p 5432 fishfarm -f create-tables.sql
