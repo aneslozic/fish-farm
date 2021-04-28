@@ -16,9 +16,9 @@ import CreateFishFarm from './CreateFishFarm';
 
 const FishFarmOverview = () => {
     const [showModal, setShowModal] = useState(false);
-    
+
     const { isLoading, error, data } = useQuery('fishFarms', async () => {
-        const response = await fetch('https://localhost:5001/FishFarm')
+        const response = await fetch('http://localhost:5000/FishFarm')
         const data = await response.json();
         return data;
     })
@@ -30,12 +30,12 @@ const FishFarmOverview = () => {
     return (
         <Container className="mt-5">
             <Row>
-                <Col>
+                <Col className='text-right'>
                     <Button onClick={() => setShowModal(true)}>Register fish farm</Button>
                 </Col>
             </Row>
             <Row>
-                {data.map(({ name, picture, id }) => (
+                {data.length ? data.map(({ name, picture, id }) => (
                     <Col md={6} lg={4} className="mt-4">
                         <Card>
                             <CardImg top width="100px" src={picture} alt="Card image cap" />
@@ -53,7 +53,10 @@ const FishFarmOverview = () => {
                             </CardBody>
                         </Card>
                     </Col>
-                ))
+                )) :
+                    <Col>
+                        <h2>There are no registed fish farms</h2>
+                    </Col>
                 }
             </Row>
             { showModal && <CreateFishFarm closeModal={() => setShowModal(false)} />}

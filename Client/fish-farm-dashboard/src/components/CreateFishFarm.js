@@ -24,7 +24,7 @@ const CreateFishFarm = ({ closeModal }) => {
     const [image, setImage] = useState(null);
 
     const mutation = useMutation(fishFarm =>
-        fetch('https://localhost:5001/FishFarm', {
+        fetch('http://localhost:5000/FishFarm', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

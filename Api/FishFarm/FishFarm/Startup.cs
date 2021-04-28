@@ -44,7 +44,7 @@ namespace FishFarm
             });
             services.AddDbContext<fishfarmContext>(options =>
                 options.UseNpgsql(
-                    "User ID=fishfarm;Password=fishfarm;Host=localhost;Port=5432;Database=fishfarm;"));
+                    "User ID=fishfarm;Password=fishfarm;Host=postgres;Port=5432;Database=fishfarm;"));
             services.AddTransient<IFishFarmService, FishFarmService>();
             services.AddTransient<IWorkerService, WorkerService>();
         }

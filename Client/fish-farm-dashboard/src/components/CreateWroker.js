@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { history } from "../App";
 import { useMutation, useQueryClient } from 'react-query';
 import {
     Row,
@@ -27,7 +26,7 @@ const CreateWorker = ({ closeModal, fishFarmId }) => {
     const [position, setPosition] = useState('');
 
     const mutation = useMutation(worker =>
-        fetch('https://localhost:5001/Worker', {
+        fetch('http://localhost:5000/Worker', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -126,7 +125,7 @@ const CreateWorker = ({ closeModal, fishFarmId }) => {
                 <Row>
                     <Col>
                         <FormGroup>
-                            <Label className="mr-2">Choose date when certification will expire</Label>
+                            <Label className="mr-2">Choose a date when the certification will expire</Label>
                             <DatePicker
                                 selected={certifiedUntil}
                                 onChange={setCertifiedUntil}

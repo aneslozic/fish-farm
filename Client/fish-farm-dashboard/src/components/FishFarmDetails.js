@@ -7,8 +7,6 @@ import {
     Card,
     CardImg,
     CardBody,
-    CardTitle,
-    CardSubtitle,
     Button
 } from 'reactstrap';
 import CreateWorker from './CreateWroker';
@@ -22,7 +20,7 @@ const FishFarmDetails = () => {
     const [showModal, setShowModal] = useState(false);
     const { id } = useParams();
     const { isLoading, error, data } = useQuery('fishFarm', async () => {
-        const response = await fetch(`https://localhost:5001/FishFarm/${id}`)
+        const response = await fetch(`http://localhost:5000/FishFarm/${id}`)
         const data = await response.json();
         return data;
     })
@@ -54,7 +52,7 @@ const FishFarmDetails = () => {
             </Row>
             <Row className='mt-5'>
                 <Col>
-                    <h2>Workers</h2>
+                    <h2>{data.workers.lenght ? "Workers" : "No workers at this fish farm"}</h2>
                 </Col>
             </Row>
             <Row className='mt-5'>
@@ -65,15 +63,11 @@ const FishFarmDetails = () => {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        <CardTitle tag="data">{name}</CardTitle>
-                                        <CardSubtitle>{position}</CardSubtitle>
-                                        <CardSubtitle>{email}</CardSubtitle>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <h5>Age: {age}</h5>
-                                        <h5>Certified until: {dayjs(certifiedUntil).format('YYYY-MM-DD HH:mm')}</h5>
+                                        <h4>{name}</h4>
+                                        <h6>{position}</h6>
+                                        <h6>{email}</h6>
+                                        <h6>Age: {age}</h6>
+                                        <h6>Certified until: {dayjs(certifiedUntil).format('YYYY-MM-DD HH:mm')}</h6>
                                     </Col>
                                 </Row>
 

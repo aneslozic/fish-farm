@@ -1,0 +1,38 @@
+version: "3"
+
+services: 
+
+  postgres:
+    build: ./Database
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=fishfarm
+      - POSTGRES_USER=fishfarm
+      - POSTGRES_DB=fishfarm
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./Database/create-tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - mynetwork
+
+  backend: 
+    build: ./Api/FishFarm/FishFarm/.
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+
+  frontend:
+    build: ./Client/fish-farm-dashboard/.
+    ports:
+      - 3000:3000
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
